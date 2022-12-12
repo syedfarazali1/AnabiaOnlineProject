@@ -1,0 +1,103 @@
+﻿@model IEnumerable<AnabiaOnline.Models.Order>
+
+@{
+    ViewBag.Title = "OrderList";
+    Layout = "~/Views/Shared/dashboard.cshtml";
+}
+
+<h2>Dispatch List</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Customer Name
+        </th>
+        <th>
+            Contact Number
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Country
+        </th>
+        <th>
+            City
+        </th>
+        <th>
+            Dispatch Date
+        </th>
+
+
+
+
+
+        <th></th>
+    </tr>
+    
+    @foreach (var item in Model)
+    {
+        if (item.StoreID.ToString() == Session["StoreID"].ToString())
+        {
+
+       
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @foreach (var items in Session["Country"] as List<AnabiaOnline.Models.Country>)
+                {
+
+                    if (items.CountryId == item.Country)
+                    {
+                        @Html.DisplayFor(modelItem => items.Con_Name)
+
+                    }
+
+
+
+
+                }
+
+            </td>
+            <td>
+                @foreach (var items in Session["City"] as List<AnabiaOnline.Models.City>)
+                {
+
+                    if (items.CityId == item.City)
+                    {
+                        @Html.DisplayFor(modelItem => items.Cit_Name)
+
+                    }
+
+
+
+
+                }
+
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DispatchDate)
+            </td>
+
+
+
+
+            <td>
+
+                @Html.ActionLink("Details", "OrderDetails", new { id = item.OrderID }, new { @class = "btn btn-primary" })
+
+            </td>
+        </tr> }
+    }
+
+</table>

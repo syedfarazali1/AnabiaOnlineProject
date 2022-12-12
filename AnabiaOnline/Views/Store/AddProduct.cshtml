@@ -1,0 +1,86 @@
+﻿@model AnabiaOnline.Models.Product
+
+@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Views/Shared/dashboard.cshtml";
+}
+
+
+<form action="" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Product</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <input type="hidden" name="ProductStockStatus" value="1" />
+        <input type="hidden" name="ProductStatus" value="1" />
+        <div class="form-group">
+            Category
+            <div class="col-md-10">
+                <br />
+                <select name="CategoryID" class="form-control">
+                    @foreach (var item in @ViewBag.list)
+                    {
+                        <option value="@item.CategoryID">@item.CategoryName</option>
+                    }
+
+                </select>
+                @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            Product Name
+            <div class="col-md-10">
+                <br />
+                @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            Price
+            <div class="col-md-10">
+                <br />
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            Delivery Charges
+            <div class="col-md-10">
+                <br />
+                @Html.EditorFor(model => model.DeliveryCharges, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DeliveryCharges, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            Product Description<br />
+            <div class="col-md-10">
+                <br />
+                @Html.EditorFor(model => model.ProductDescription, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductDescription, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group"><br />
+            Product Image<br />
+            <div class="col-md-10">
+                <br />
+                <input type="file" class="form-control" name="proimg" value="" />
+                @Html.ValidationMessageFor(model => model.ProductImage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>

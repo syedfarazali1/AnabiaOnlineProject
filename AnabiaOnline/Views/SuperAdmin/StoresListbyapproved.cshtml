@@ -1,0 +1,96 @@
+﻿@model IEnumerable<AnabiaOnline.Models.Store>
+
+@{
+    ViewBag.Title = "StoresListbyapproved";
+    Layout = "~/Views/Shared/dashboard.cshtml";
+}
+
+<h2>StoresListbyapproved</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table" id="table">
+    <tr>
+        <th>
+           Store Logo
+        </th>
+        <th>
+            F_Name
+        </th>
+        <th>
+            L_Name
+        </th>
+        <th>
+            Contact No
+        </th>
+        <th>
+            Business Name
+        </th>
+        <th>
+            Business Address
+        </th>
+
+        <th>
+            Domain Name
+        </th>
+
+        <th>
+            Package
+        </th>
+        <th>
+            Status
+        </th>
+        <th colspan="2" class="text-center">
+            Action
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+     <img src="~/files/@item.Store_Logo" width="100px" height="100px" alt="@item.Store_Logo" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FirstName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.LastName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ContactNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BusinessName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BusinessAddress)
+    </td>
+
+
+    <td>
+        @Html.DisplayFor(modelItem => item.DomainName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Package1.PackageName)
+    </td>
+    <td>
+        @if (item.Status == 1)
+        {
+            <p>Approved</p>
+        }
+    </td>
+  
+    <td>
+
+        @Html.ActionLink("Details", "StoresListbyapprovedDetails", new { id = item.StoreID }, new { @class = "btn btn-primary" })
+
+    </td>
+</tr>
+    }
+
+</table>

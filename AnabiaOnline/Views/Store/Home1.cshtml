@@ -1,0 +1,160 @@
+﻿@model IEnumerable<AnabiaOnline.Models.Store>
+
+@{
+    ViewBag.Title = "Home1";
+    Layout = "~/Views/Shared/UserView.cshtml";
+}
+
+<h2>Home1</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BusinessName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BusinessAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmailID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CnicHolderName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CnicNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CnicExpiryDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FrontCopyOfCnic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BackCopyOfCnic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DomainName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoginID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Password)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RegistrationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApprovedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Store_Logo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.City1.Cit_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Country1.Con_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Package1.PackageName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.State1.State_Name)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BusinessName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BusinessAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmailID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CnicHolderName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CnicNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CnicExpiryDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FrontCopyOfCnic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BackCopyOfCnic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DomainName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoginID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Password)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RegistrationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApprovedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Store_Logo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City1.Cit_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Country1.Con_Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Package1.PackageName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.State1.State_Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.StoreID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.StoreID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.StoreID })
+        </td>
+    </tr>
+}
+
+</table>

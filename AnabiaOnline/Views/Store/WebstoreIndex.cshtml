@@ -1,0 +1,152 @@
+﻿@model IEnumerable<AnabiaOnline.Models.StoreWeb>
+
+@{
+    ViewBag.Title = "WebstoreIndex";
+    Layout = "~/Views/Shared/dashboard.cshtml";
+}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">File type must be PNG or JPG</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closebtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">you can not add more images only update</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closebtn1" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">Banner are added successfully</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closebtn2" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $("#closebtn").click(function (e) {
+        $('#exampleModal').modal('hide');
+
+    });
+</script>
+<script type="text/javascript">
+    $("#closebtn1").click(function (e) {
+        $('#exampleModal1').modal('hide');
+
+    });
+</script>
+<script type="text/javascript">
+    $("#closebtn2").click(function (e) {
+        $('#exampleModal2').modal('hide');
+
+    });
+</script>
+
+
+@if (TempData["Add"] != null)
+{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#exampleModal2').modal('show');
+        });
+    </script>
+}
+@if (TempData["filetype"] != null)
+{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#exampleModal').modal('show');
+        });
+    </script>
+}
+
+@if (TempData["already"] != null)
+{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#exampleModal1').modal('show');
+        });
+    </script>
+}
+<h2>Webstore Index</h2>
+
+
+
+<a class="btn btn-primary" href="~/Store/WebstoreCreate">Create New</a>
+<table class="table">
+    <tr>
+
+        <th>
+            Store Banner
+        </th>
+        <th>
+            Store Banner
+        </th>
+        <th>
+            Store Banner
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+
+            <td>
+                <img width="50px" height="50px" src="~/UserAsset/img/ProductImages/@item.StoreBanner1" />
+            </td>
+            <td>
+                <img width="50px" height="50px" src="~/UserAsset/img/ProductImages/@item.StoreBanner2" />
+            </td>
+            <td>
+                <img width="50px" height="50px" src="~/UserAsset/img/ProductImages/@item.StoreBanner3" />
+            </td>
+
+
+            <td>
+                @Html.ActionLink("Edit", "WebstoreEdit", new { id = item.StoreWebID }, new { @class = "btn btn-primary" })
+
+            </td>
+        </tr>
+    }
+
+</table>

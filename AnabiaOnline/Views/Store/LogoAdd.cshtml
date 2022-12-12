@@ -1,0 +1,19 @@
+﻿@model AnabiaOnline.Models.logo
+
+@{
+    ViewBag.Title = "LogoAdd";
+    Layout = "~/Views/Shared/dashboard.cshtml";
+}
+
+<h2>Add Logo </h2>
+
+<form action="" method="post" enctype="multipart/form-data">
+
+    <label>Logo</label>
+    <input type="file" name="file" class="form-control" required value="" /> <br />
+    <input type="submit" class="btn btn-primary" value="Add" />
+</form>
+<br />
+<div>
+    @Html.ActionLink("Back to List", "LogoIndex")
+</div>

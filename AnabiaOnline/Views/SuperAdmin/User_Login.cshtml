@@ -1,0 +1,96 @@
+﻿@model AnabiaOnline.Models.User
+
+@{
+    ViewBag.Title = "User_Login";
+    Layout = "~/Views/Shared/AnabiaOnline_layout.cshtml";
+
+}
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+                
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">Incorrect Login Id Password  </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closebtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+@if (ViewBag.massages != null)
+{
+<script>
+    $(document).ready(function () {
+        $('#exampleModal').modal('show');
+    });
+
+
+</script> 
+}
+
+
+<script>
+
+    $("#closebtn").click(function (e) {
+        $('#exampleModal').modal('hide');
+
+    });
+</script>
+
+
+<style>
+    form {
+        border: 2px solid orange;
+        padding: 10px 10px 10px 10px;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+
+        </div>
+        <div class="col-4">
+
+
+
+            <div class="row text-center">
+                <div class="col-12">
+                    <h2>Login Form</h2>
+                </div>
+            </div>
+
+
+            <form action="" method="post">
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <label>Login ID</label>
+                            <input type="text" name="user" required class="form-control" />
+                            <label>Password</label>
+                            <input type="password" name="pass" required class="form-control" /> <br />
+                            <input type="submit" class="btn btn-warning" value="Login" />
+                        </div>
+                        <br />
+                        
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4">
+
+        </div>
+    </div>
+
+</div>
+

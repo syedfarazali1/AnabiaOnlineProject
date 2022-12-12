@@ -1,0 +1,62 @@
+﻿@model AnabiaOnline.Models.StoreWeb
+
+@{
+    ViewBag.Title = "WebstoreCreate";
+    Layout = "~/Views/Shared/dashboard.cshtml";
+}
+
+<h2>WebStore</h2>
+
+<form action="" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+        <div class="form-group">
+            Store Banner
+            <br />
+            <div class="col-md-10">
+                <br />
+                <input type="file" name="StoreBanner1" class="form-control" required value="" />
+                @Html.ValidationMessageFor(model => model.StoreBanner1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group">
+            Store Banner
+            <br />
+            <div class="col-md-10">
+                <br />
+                <input type="file" name="StoreBanner2" class="form-control" required value="" />
+                @Html.ValidationMessageFor(model => model.StoreBanner2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group">
+            Store Banner
+            <br />
+            <div class="col-md-10">
+                <br />
+                <input type="file" name="StoreBanner3" class="form-control" required value="" />
+                @Html.ValidationMessageFor(model => model.StoreBanner3, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <br />
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+</form>
+<br />
+<div>
+    @Html.ActionLink("Back to List", "WebstoreIndex")
+</div>

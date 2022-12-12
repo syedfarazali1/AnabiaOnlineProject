@@ -1,0 +1,48 @@
+﻿@model IEnumerable<AnabiaOnline.Models.ProductImage>
+
+@{
+    ViewBag.Title = "ProductImagesList";
+    Layout = "~/Views/Shared/dashboard.cshtml";
+}
+
+<h2>Product Images </h2>
+
+<p>
+
+    <a class="btn btn-primary" href="~/store/ProductList">Back To List</a>
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductImage1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Product.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Store.FirstName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <img width="100px" height="100px" src="~/UserAsset/img/ProductImages/@item.ProductImage1" />
+          
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Product.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Store.FirstName)
+        </td>
+        <td>
+  
+     
+            @Html.ActionLink("Delete", "ProductImageDelete", new { id=item.ProductImagesID },new { @class = "btn btn-primary" })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "CategoryList";
+    Layout = "~/Views/Shared/dashboard.cshtml";
+}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">Can Not Allow Add More Category In This Package</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closebtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">You Have A New Category</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closebtn1" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script>
+
+    $("#closebtn").click(function (e) {
+        $('#exampleModal').modal('hide');
+
+    });
+    $("#closebtn1").click(function (e) {
+        $('#exampleModal1').modal('hide');
+
+    });
+
+</script>
+
+@if (TempData["package"] != null )
+{
+    <script>
+        $(document).ready(function () {
+            $('#exampleModal').modal('show');
+        });
+
+
+    </script>
+    
+}
+@if (TempData["AddCategory"] != null)
+{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#exampleModal1').modal('show');
+        });
+    </script>
+}
+
+<h2>Category List</h2>
+
+<p>
+    <a class="btn btn-primary" href="/Store/AddCategory">Add Category</a>
+</p>
+
+
+<table class="table">
+    <tr>
+
+
+        <th>
+            Category Name
+        </th>
+        <th>
+            Creation Date
+        </th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var item in ViewBag.list)
+    {
+        <tr>
+
+
+            <td>
+                @item.CategoryName
+            </td>
+            <td>
+                @item.CreationDate
+            </td>
+            <td>
+                @Html.ActionLink("UpdateCategory", "UpdateCategory", new { id = item.CategoryID }, new { @class = " btn btn-primary" })
+              
+            </td>
+        </tr>
+    }
+
+</table>

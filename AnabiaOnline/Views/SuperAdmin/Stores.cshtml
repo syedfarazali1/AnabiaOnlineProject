@@ -1,0 +1,354 @@
+﻿@model AnabiaOnline.Models.Store
+@{
+    ViewBag.Title = "Stores";
+    Layout = "~/Views/Shared/AnabiaOnline_layout.cshtml";
+}
+
+<style>
+    label {
+        font-weight: 600;
+        color: #555;
+    }
+</style>
+<div class="container">
+    <form action="" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2>Shop Registration Form </h2>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-6">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <div class="col-md-10">
+                            <input type="text" name="FirstName" class="form-control" required value="" />
+
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label>Contact Number</label>
+                        <div class="col-md-10">
+                            <input type="number" name="ContactNumber" class="form-control" required value="" />
+                            @Html.ValidationMessageFor(model => model.ContactNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label>Email ID</label>
+
+                        <div class="col-md-10">
+                            <input type="text" required name="EmailID" class="form-control" value="" />
+                            @Html.ValidationMessageFor(model => model.EmailID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                   <div class="form-group">
+                        <div class="col-md-10">
+                            <input type="hidden" class="form-control" name="Status" value="0" />
+                            @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label>Cnic Number</label>
+                        <div class="col-md-10">
+                            <input type="number" name="CnicNumber" class="form-control" required value="" />
+
+                            @Html.ValidationMessageFor(model => model.CnicNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div><br />
+                    <div class="form-group">
+                        <label>Cnic Holder Name</label>
+
+
+                        <div class="col-md-10">
+                            <input type="text" name="CnicHolderName" class="form-control" required value="" />
+                            @Html.ValidationMessageFor(model => model.CnicHolderName, "", new { @class = "text-danger" })
+                        </div>
+                    </div><br />
+                    <div class="form-group">
+                        <label>Business Name</label>
+
+                        <div class="col-md-10">
+                    <input type="text" id="BusinessName" @*onblur="BusinessNamecheck()"*@ name="BusinessName" class="form-control" required value="" />
+                            <span id="BusinessNameStatus">   </span>
+                            @Html.ValidationMessageFor(model => model.BusinessName, "", new { @class = "text-danger" })
+                        </div>
+                    </div><br />
+
+                    <div class="form-group">
+                        <label>Business Address</label>
+                        <div class="col-md-10">
+                            <input type="text" name="BusinessAddress" class="form-control" required value="" />
+
+                            @Html.ValidationMessageFor(model => model.BusinessAddress, "", new { @class = "text-danger" })
+                        </div>
+                    </div><br />
+
+                    <div class="form-group">
+                        <label>Country</label>
+
+                        <div class="col-md-10">
+                            <select name="Country" required class="form-control">
+                                @foreach (var item in ViewBag.countrylist)
+                                {
+                                    <option value="@item.CountryId">@item.Con_Name</option>
+                                }
+
+                            </select>
+                            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                        </div>
+                    </div><br />
+
+                    <div class="form-group">
+                        <label>City</label>
+                        <div class="col-md-10">
+                            <select name="City" required class="form-control">
+                            @if (ViewBag.Citieslist != null)
+                            {
+
+                            
+                                foreach (var item in ViewBag.Citieslist)
+                                {
+                                    <option value="@item.CityId">@item.Cit_Name</option>
+                                }}
+
+                            </select>
+                        </div>
+                    </div>
+                    <br />
+
+
+
+
+                </div>
+
+                <div class="col-6">
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <div class="col-md-10">
+                            <input type="text" required name="LastName" class="form-control" value="" />
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+
+                    <div class="form-group">
+                        <label>Cnic Expiry Date</label>
+                        <div class="col-md-10">
+                            <input type="date" required name="CnicExpiryDate" class="form-control" value="" />
+
+                            @Html.ValidationMessageFor(model => model.CnicExpiryDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label>Front Copy Of Cnic</label> <small class="text-danger">Must PNG or JPG</small>
+
+                        <div class="col-md-10">
+                            <input type="file" required name="FrontCopyOfCnic" class="form-control" value="" />
+
+                            @Html.ValidationMessageFor(model => model.FrontCopyOfCnic, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label>Back Copy Of Cnic</label><small class="text-danger"> Must PNG or JPG</small>
+
+                        <div class="col-md-10">
+                            <input type="file" required name="BackCopyOfCnic" class="form-control" value="" />
+                            @Html.ValidationMessageFor(model => model.BackCopyOfCnic, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label>Domain Name</label>
+
+                        <div class="col-md-10">
+                            <input type="text" onblur="domaincheck()" id="domain" required name="DomainName" class="form-control" value="" />
+                            <span id="Status">   </span>
+                            @Html.ValidationMessageFor(model => model.DomainName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label>Store Logo</label><small class="text-danger"> Must PNG or JPG</small>
+
+                        <div class="col-md-10">
+                            <input type="file" required name="Store_Logo" class="form-control" value="" />
+                            @Html.ValidationMessageFor(model => model.Store_Logo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label>Package</label>
+                        <div class="col-md-10">
+                            <select name="Package" required class="form-control">
+                                @foreach (var item in ViewBag.Packageslist)
+                                {
+                                    <option value="@item.PackageID">@item.PackageName</option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label>Login ID</label>
+                        <div class="col-md-10">
+                            <input type="text" id="login" onblur="LoginIDcheck()" required name="LoginID" class="form-control" value="" />
+                            <span id="LoginIDStatus">   </span>
+                            @Html.ValidationMessageFor(model => model.LoginID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                
+                    
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="col-md-10">
+                            <input type="password" required name="Password" class="form-control" value="" />
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+
+
+                    <br />
+                    <div class="form-group">
+
+                        <div class="col-md-10">
+                            <input type="hidden" class="form-control" name="ApprovedBy" value="0" />
+
+                            @Html.ValidationMessageFor(model => model.ApprovedBy, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <br />
+                <div class="form-group mt-3">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+                
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">File Type Must PNG JPG</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closebtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+<script>
+
+    $("#closebtn").click(function (e) {
+        $('#exampleModal').modal('hide');
+
+    });
+
+</script>
+@if (ViewBag.massage != null)
+{
+    <script>
+        $(document).ready(function () {
+            $('#exampleModal').modal('show');
+        });
+
+
+    </script>
+}
+
+
+<script type="text/javascript">
+    function domaincheck() {
+        if ($("#domain").val().length > 0) {
+            $("#Status").html("checking...");
+            $.post("@Url.Action("CheckDomaim", "SuperAdmin")",
+                {
+                    Domain: $("#domain").val()
+                },
+                function (data) {
+                    if (data == 0) {
+                        $("#Status").html('<font color="Green">Available !.</font>');
+                        $("#domain").css("border-color", "Green");
+
+                    }
+                    else {
+                        $("#Status").html('<font color="Red">That Domain is not Available.Try Another .</font>');
+                        $("#domain").css("border-color", "Red");
+                        $("#domain").val("")
+                    }
+                });
+        }
+    }
+    @*function BusinessNamecheck() {
+        if ($("#BusinessName").val().length > 0) {
+            $("#BusinessName").html("checking...");
+            $.post("@Url.Action("CheckBussname", "SuperAdmin")",
+                {
+                    bussiness: $("#BusinessName").val()
+                },
+                function (data) {
+                    if (data == 0) {
+                        $("#BusinessNameStatus").html('<font color="Green">Available !. you can take it.</font>');
+                        $("#BusinessName").css("border-color", "Green");
+
+                    }
+                    else {
+                        $("#BusinessNameStatus").html('<font color="Red">That Business Name is taken.Try Another .</font>');
+                        $("#BusinessName").css("border-color", "Red");
+                        $("#BusinessName").val("")
+                    }
+                });
+        }
+    }*@
+    function LoginIDcheck() {
+        if ($("#login").val().length > 0) {
+            $("#login").html("checking...");
+            $.post("@Url.Action("CheckBussname", "SuperAdmin")",
+                {
+                    bussiness: $("#login").val()
+                },
+                function (data) {
+                    if (data == 0) {
+                        $("#LoginIDStatus").html('<font color="Green">Available !. you can take it.</font>');
+                        $("#login").css("border-color", "Green");
+
+                    }
+                    else {
+                        $("#LoginIDStatus").html('<font color="Red">That login ID is not Available.Try Another .</font>');
+                        $("#login").css("border-color", "Red");
+                        $("#login").val("")
+                    }
+                });
+        }
+    }
+
+
+</script>

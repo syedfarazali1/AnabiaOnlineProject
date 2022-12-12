@@ -1,0 +1,60 @@
+﻿@model AnabiaOnline.Models.Store
+
+@{
+    ViewBag.Title = "User_Login";
+    Layout = "~/Views/Shared/UserView.cshtml";
+}
+
+@if (ViewBag.massages != null)
+{
+<script >
+    alert("Incorrect Id and password");
+</script>
+}
+<style>
+    #form {
+        border: 2px solid orange;
+        padding: 10px 10px 10px 10px;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+
+        </div>
+        <div class="col-4">
+
+
+
+            <div class="row text-center">
+                <div class="col-12">
+                    <h2>Login Form</h2>
+                </div>
+            </div>
+
+
+            <form action="" method="post" id="form">
+                @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <label>Login ID</label>
+                            <input type="text" name="user" class="form-control" />
+                            <label>Password</label>
+                            <input type="text" name="pass" class="form-control" /> <br />
+                            <input type="submit" class="btn btn-warning" value="Login" />
+                        </div>
+                        <br />
+                        <a class=" text-dark fw-500" href="~/SuperAdmin/Stores">Registration</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-4">
+
+        </div>
+    </div>
+
+</div>

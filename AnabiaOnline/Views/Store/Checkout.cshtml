@@ -1,0 +1,174 @@
+﻿
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/UserView.cshtml";
+}
+
+
+
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" href="#">Home</a>
+                <a class="breadcrumb-item text-dark" href="#">Shop</a>
+                <span class="breadcrumb-item active">Checkout</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Checkout Start -->
+
+
+
+
+<form action="Pleaseorder" method="post">
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Billing Address</span></h5>
+                <div class="bg-light p-30 mb-5">
+                    <div class="row">
+
+                        <div class="col-md-6 form-group">
+                            <input class="form-control" type="hidden" name="date" value="@DateTime.Now" placeholder="@DateTime.Now">
+                            <input class="form-control" name="status" value="0" type="hidden" placeholder="qty">
+
+                            <label>First Name</label>
+                            <input class="form-control" required name="CustomerName" type="text" placeholder="John">
+                           
+
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Contact Number</label>
+                            <input class="form-control" required name="ContactNumber" type="number" placeholder="Contact Number">
+                        </div>   <div class="col-md-6 form-group">
+                            <label>E-mail</label>
+                            @ViewBag.aaa
+                            <input class="form-control" required type="email" placeholder="example@email.com">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Address Line </label>
+                            <input class="form-control" required name="Address" type="text" placeholder="123 Street">
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Country</label>
+                            <select id="comboboxcountry" required name="Country" class="form-control">
+
+                                @foreach (var item in ViewBag.Countrylist)
+                                {
+                                    <option value="@item.CountryId"> @item.Con_Name</option>
+                                }
+
+                            </select>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>City</label>
+
+                            <select name="city" id="comboboxcity" required class="form-control">
+                                @if (ViewBag.Citylist != null)
+                                {
+                                    foreach (var item in ViewBag.Citylist)
+                                    {
+                                        <option value="@item.CityId"> @item.Cit_Name</option>
+                                    }
+                                }
+
+                            </select>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Order Total</span></h5>
+                <div class="bg-light p-30 mb-5">
+                    <div class="border-bottom justify-content-between">
+                        <h6 class="mb-3 d-inline-block mr-5">Products</h6>
+                        <h6 class="mb-3 d-inline-block ">Quantity</h6>
+
+                        @if (Session["cart"] as List<AnabiaOnline.Models.addtocard> == null)
+                        {
+
+                        }
+                        else
+                        {
+
+                            foreach (var item in Session["cart"] as List<AnabiaOnline.Models.addtocard>)
+                            {<div class="d-flex justify-content-between">
+
+                                    <p>@item.Pro_Name</p>
+                                    <p>@item.Ord_Quantity</p>
+                                    <p>Rs @item.Ord_Bill</p>
+
+
+                                </div>
+                            }
+                        }
+
+
+                    </div>
+                    <div class="border-bottom pt-3 pb-2">
+                        <div class="d-flex justify-content-between mb-3">
+                            <h6>Subtotal</h6>
+                            <h6>Rs @Session["SubTotal"]</h6>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <h6 class="font-weight-medium">Shipping</h6>
+                            <h6 class="font-weight-medium">Rs @Session["Shipping"]</h6>
+                        </div>
+                    </div>
+                    <div class="pt-2">
+                        <div class="d-flex justify-content-between mt-2">
+                            <h5>Total</h5>
+                            <h5>Rs @Session["Total"]</h5>
+                        </div>
+                    </div>
+                </div>   <div class="mb-5">
+                    <h5 class="section-title position-relative text-uppercase mb-3"><span class="bg-secondary pr-3">Payment</span></h5>
+                    <div class="bg-light p-30">
+                        
+                        <div class="form-group mb-4">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" checked name="payment" id="banktransfer">
+                                <label class="custom-control-label" for="banktransfer">Cash On Delivery</label>
+                            </div>
+                        </div>
+                        <input class="btn btn-block btn-primary font-weight-bold py-3" type="submit" value="Place Order" placeholder="Place Order" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#comboboxcountry').on('change',function () {
+            var countryID = $('#comboboxcountry option:selected').val();
+            $.ajax({
+                type: 'Get',
+                data: {countryID : countryID},
+                url: '@Url.Action("Store", "GetCity")',
+                success: function (result) {
+                    /*var city = JSON.parse(result);*/
+                    var s = '<option value="-1">Selct a city</option>';
+                    for (var i = 0; i < result.lenght; i++) {
+s += '<option value="' + result[i].countryID + '">' + result[i].Cit_Name + '</option>';
+                    }
+                    $('#comboboxcity').html(s);
+                }
+            })
+        })
+
+    });
+
+</script>

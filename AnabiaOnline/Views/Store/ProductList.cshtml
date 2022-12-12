@@ -1,0 +1,204 @@
+﻿@model IEnumerable<AnabiaOnline.Models.Product>
+
+@{
+    ViewBag.Title = "ProductList";
+    Layout = "~/Views/Shared/dashboard.cshtml";
+}
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">You have a new product</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closebtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">Only png and jpg images are allowed</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closebtn1" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script>
+
+    $("#closebtn").click(function (e) {
+        $('#exampleModal').modal('hide');
+
+    });
+    $("#closebtn1").click(function (e) {
+        $('#exampleModal1').modal('hide');
+
+    });
+
+</script>
+
+@if (TempData["AddProduct"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            $('#exampleModal').modal('show');
+        });
+
+
+    </script>
+
+}
+<h2>Product List</h2>
+@*@if (TempData["AddProduct"] != null)
+    {
+        <script type="text/javascript">
+
+            alert("You have a new product")
+        </script>
+    }*@
+
+
+<p>
+
+    <a class="btn btn-primary" href="AddProduct">Create New</a>
+</p>
+@if (TempData["error"] != null)
+{
+    <script>
+        alert("Only four images are allowed on one product")
+
+    </script>
+}
+@if (TempData["filetype"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            $('#exampleModal1').modal('show');
+        });
+
+
+    </script>
+    @*<script>
+        alert("Only png and jpg images are allowed ")
+
+    </script>*@
+}
+<table class="table">
+    <tr>
+        <th>
+            Product Image
+        </th>
+        <th>
+            Product Name
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Delivery Charges
+        </th>
+        <th>
+            Product Description
+        </th>
+
+
+
+
+        <th>
+            Product Status
+        </th>
+        <th>
+            Product Stock Status
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        if (item.ProductStatus == null && item.ProductStockStatus == null)
+        {
+
+        }
+        else
+        {
+
+
+            <tr>
+                <td>
+                    <img width="100px" height="100px" src="~/UserAsset/img/ProductImages/@item.ProductImage" />
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeliveryCharges)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductDescription)
+                </td>
+
+
+                <td>
+                    @if (item.ProductStatus == 1)
+                    {
+                        @Html.ActionLink("DeActive", "ProductStatus", new { id = item.ProductID }, new { @class = "btn btn-danger" })
+                    }
+                    else if (item.ProductStatus == 0)
+                    {
+                        @Html.ActionLink("Active", "ProductStatus", new { id = item.ProductID }, new { @class = "btn btn-primary" })
+
+                    }
+                    else
+                    {
+                        <p>Old Product Status Not Updated </p>
+                    }
+                </td>
+                <td>
+                    @if (item.ProductStockStatus == 1)
+                    {
+                        @Html.ActionLink("OutStock", "ProductStockStatus", new { id = item.ProductID }, new { @class = "btn btn-primary" })
+                    }
+                    else if (item.ProductStockStatus == 0)
+                    {
+                        @Html.ActionLink("InStock", "ProductStockStatus", new { id = item.ProductID }, new { @class = "btn btn-danger" })
+
+                    }
+                    else
+                    {
+                        <p>Old Product Stock Status Not Updated </p>
+                    }
+                </td>
+
+                @*<td>
+                        @Html.ActionLink("Images", "ProductImagesList", new { id = item.ProductID }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("AddImages", "AddProductImages", new { id = item.ProductID }, new { @class = "btn btn-primary" })
+
+                    </td>*@
+            </tr>
+        }
+    }
+
+</table>

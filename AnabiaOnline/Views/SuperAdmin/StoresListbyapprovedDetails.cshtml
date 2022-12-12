@@ -1,0 +1,187 @@
+﻿@model AnabiaOnline.Models.Store
+
+@{
+    ViewBag.Title = "StoresListbyapprovedDetails";
+    Layout = "~/Views/Shared/dashboard.cshtml";
+}
+
+<h2>Approved Stores List</h2>
+
+
+
+<hr />
+
+<dl class="dl-horizontal">
+
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Store_Logo)
+    </dt>
+    <dt>
+        <img src="~/files/@Model.Store_Logo" width="100px" height="100px" alt="@Model.Store_Logo" />
+    </dt>
+    <dt>
+        @Html.DisplayNameFor(model => model.FirstName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.FirstName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.LastName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.LastName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.ContactNumber)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.ContactNumber)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.BusinessName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.BusinessName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.BusinessAddress)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.BusinessAddress)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.EmailID)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.EmailID)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.CnicHolderName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.CnicHolderName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.CnicNumber)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.CnicNumber)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.CnicExpiryDate)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.CnicExpiryDate)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.FrontCopyOfCnic)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.FrontCopyOfCnic)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.BackCopyOfCnic)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.BackCopyOfCnic)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.DomainName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.DomainName)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.LoginID)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.LoginID)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Password)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Password)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Status)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Status)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.RegistrationDate)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.RegistrationDate)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.ApprovedBy)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.ApprovedBy)
+    </dd>
+
+    <dt>
+        City
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.CityId)
+    </dd>
+
+    <dt>
+        Country
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Country)
+    </dd>
+
+    <dt>
+        @Html.DisplayNameFor(model => model.Package1.PackageName)
+    </dt>
+
+    <dd>
+        @Html.DisplayFor(model => model.Package1.PackageName)
+    </dd>
+
+
+
+</dl>
+@Html.ActionLink("Back to List", "StoresListbyapproved")
+    </div>

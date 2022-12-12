@@ -1,0 +1,536 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="db_AnabiaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="CityId" />
+    </Key>
+    <Property Name="CityId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Cit_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="countryid" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="CountryId" />
+    </Key>
+    <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Con_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Invoice">
+    <Key>
+      <PropertyRef Name="InvoiceID" />
+    </Key>
+    <Property Name="InvoiceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StoreID" Type="Int32" />
+    <Property Name="InvoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="InvoiceMonth" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="InvoiceDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="DueDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="InvoiceAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="InvoiceType" Type="Int32" />
+    <Property Name="InvoiceGenerateBy" Type="Int32" />
+    <Property Name="PaymentMethod" Type="Int32" />
+    <Property Name="PaymentStatus" Type="Int32" />
+    <NavigationProperty Name="InvoiceType1" Relationship="Self.FK__Invoice__Invoice__70DDC3D8" FromRole="Invoice" ToRole="InvoiceType" />
+    <NavigationProperty Name="PaymentMethod1" Relationship="Self.FK__Invoice__Payment__71D1E811" FromRole="Invoice" ToRole="PaymentMethod" />
+    <NavigationProperty Name="Store" Relationship="Self.FK__Invoice__StoreID__6EF57B66" FromRole="Invoice" ToRole="Store" />
+  </EntityType>
+  <EntityType Name="InvoicePaymentReceipt">
+    <Key>
+      <PropertyRef Name="IPRID" />
+    </Key>
+    <Property Name="IPRID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceID" Type="Int32" />
+    <Property Name="Receipt" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ReceiptDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Store" Relationship="Self.FK__InvoicePa__Invoi__74AE54BC" FromRole="InvoicePaymentReceipt" ToRole="Store" />
+  </EntityType>
+  <EntityType Name="InvoiceType">
+    <Key>
+      <PropertyRef Name="InvoiceTypeID" />
+    </Key>
+    <Property Name="InvoiceTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="InvoiceType1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Invoices" Relationship="Self.FK__Invoice__Invoice__70DDC3D8" FromRole="InvoiceType" ToRole="Invoice" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="OrderDetailID" />
+    </Key>
+    <Property Name="OrderDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StoreID" Type="Int32" />
+    <Property Name="OrderID" Type="Int32" />
+    <Property Name="CategoryID" Type="Int32" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="DeliveryCharges" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="ProductCategory" Relationship="Self.FK__OrderDeta__Categ__60A75C0F" FromRole="OrderDetails" ToRole="ProductCategory" />
+    <NavigationProperty Name="Order" Relationship="Self.FK__OrderDeta__Order__5FB337D6" FromRole="OrderDetails" ToRole="Orders" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__OrderDeta__Produ__619B8048" FromRole="OrderDetails" ToRole="Products" />
+    <NavigationProperty Name="Store" Relationship="Self.FK__OrderDeta__Store__5EBF139D" FromRole="OrderDetails" ToRole="Store" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StoreID" Type="Int32" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="Int32" />
+    <Property Name="City" Type="Int32" />
+    <Property Name="OrderDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="DispatchDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="OrderDispatchedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DeliveryDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="OrderDeliverBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="OrderStatus" Type="Int32" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Order__5FB337D6" FromRole="Orders" ToRole="OrderDetails" />
+    <NavigationProperty Name="Store" Relationship="Self.FK__Orders__StoreID__59063A47" FromRole="Orders" ToRole="Store" />
+  </EntityType>
+  <EntityType Name="Package">
+    <Key>
+      <PropertyRef Name="PackageID" />
+    </Key>
+    <Property Name="PackageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PackageName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Stores" Relationship="Self.FK__Store__Package__44FF419A" FromRole="Package" ToRole="Store" />
+  </EntityType>
+  <EntityType Name="PaymentMethod">
+    <Key>
+      <PropertyRef Name="PaymentMethodID" />
+    </Key>
+    <Property Name="PaymentMethodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentMethod1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Invoices" Relationship="Self.FK__Invoice__Payment__71D1E811" FromRole="PaymentMethod" ToRole="Invoice" />
+  </EntityType>
+  <EntityType Name="ProductCategory">
+    <Key>
+      <PropertyRef Name="CategoryID" />
+    </Key>
+    <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StoreID" Type="Int32" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreationDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Categ__60A75C0F" FromRole="ProductCategory" ToRole="OrderDetails" />
+    <NavigationProperty Name="Store" Relationship="Self.FK__ProductCa__Store__4CA06362" FromRole="ProductCategory" ToRole="Store" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Products__Catego__5165187F" FromRole="ProductCategory" ToRole="Products" />
+  </EntityType>
+  <EntityType Name="ProductImage">
+    <Key>
+      <PropertyRef Name="ProductImagesID" />
+    </Key>
+    <Property Name="ProductImagesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StoreID" Type="Int32" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="ProductImage1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Product" Relationship="Self.FK__ProductIm__Produ__5629CD9C" FromRole="ProductImages" ToRole="Products" />
+    <NavigationProperty Name="Store" Relationship="Self.FK__ProductIm__Store__5535A963" FromRole="ProductImages" ToRole="Store" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StoreID" Type="Int32" />
+    <Property Name="CategoryID" Type="Int32" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="DeliveryCharges" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ProductDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreationDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Produ__619B8048" FromRole="Products" ToRole="OrderDetails" />
+    <NavigationProperty Name="ProductCategory" Relationship="Self.FK__Products__Catego__5165187F" FromRole="Products" ToRole="ProductCategory" />
+    <NavigationProperty Name="ProductImages" Relationship="Self.FK__ProductIm__Produ__5629CD9C" FromRole="Products" ToRole="ProductImages" />
+    <NavigationProperty Name="Store" Relationship="Self.FK__Products__StoreI__5070F446" FromRole="Products" ToRole="Store" />
+    <Property Name="ProductStatus" Type="Int32" />
+    <Property Name="ProductImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="ProductStockStatus" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Users" Relationship="Self.FK__Users__RoleID__267ABA7A" FromRole="Roles" ToRole="Users" />
+  </EntityType>
+  <EntityType Name="Store">
+    <Key>
+      <PropertyRef Name="StoreID" />
+    </Key>
+    <Property Name="StoreID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ContactNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="BusinessName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BusinessAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="Int32" />
+    <Property Name="City" Type="Int32" />
+    <Property Name="State" Type="Int32" />
+    <Property Name="EmailID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CnicHolderName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CnicNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="CnicExpiryDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="FrontCopyOfCnic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BackCopyOfCnic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DomainName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Package" Type="Int32" />
+    <Property Name="LoginID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+    <Property Name="RegistrationDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ApprovedBy" Type="Int32" />
+    <Property Name="Store_Logo" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CityId" Type="Int32" />
+    <NavigationProperty Name="Invoices" Relationship="Self.FK__Invoice__StoreID__6EF57B66" FromRole="Store" ToRole="Invoice" />
+    <NavigationProperty Name="InvoicePaymentReceipts" Relationship="Self.FK__InvoicePa__Invoi__74AE54BC" FromRole="Store" ToRole="InvoicePaymentReceipt" />
+    <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__Store__5EBF139D" FromRole="Store" ToRole="OrderDetails" />
+    <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__StoreID__59063A47" FromRole="Store" ToRole="Orders" />
+    <NavigationProperty Name="Package1" Relationship="Self.FK__Store__Package__44FF419A" FromRole="Store" ToRole="Package" />
+    <NavigationProperty Name="ProductCategories" Relationship="Self.FK__ProductCa__Store__4CA06362" FromRole="Store" ToRole="ProductCategory" />
+    <NavigationProperty Name="ProductImages" Relationship="Self.FK__ProductIm__Store__5535A963" FromRole="Store" ToRole="ProductImages" />
+    <NavigationProperty Name="Products" Relationship="Self.FK__Products__StoreI__5070F446" FromRole="Store" ToRole="Products" />
+    <NavigationProperty Name="StoreWebs" Relationship="Self.FK__StoreWeb__StoreI__48CFD27E" FromRole="Store" ToRole="StoreWeb" />
+  </EntityType>
+  <EntityType Name="StoreWeb">
+    <Key>
+      <PropertyRef Name="StoreWebID" />
+    </Key>
+    <Property Name="StoreWebID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StoreID" Type="Int32" />
+    <Property Name="StoreBanner1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="StoreBanner2" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="StoreBanner3" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="CreationDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Store" Relationship="Self.FK__StoreWeb__StoreI__48CFD27E" FromRole="StoreWeb" ToRole="Store" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Department" Type="Int32" />
+    <Property Name="Designation" Type="Int32" />
+    <Property Name="CnicNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="LoginID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CreationDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="RoleID" Type="Int32" />
+    <NavigationProperty Name="Role" Relationship="Self.FK__Users__RoleID__267ABA7A" FromRole="Users" ToRole="Roles" />
+  </EntityType>
+  <Association Name="FK__Invoice__Invoice__70DDC3D8">
+    <End Role="InvoiceType" Type="Self.InvoiceType" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="InvoiceType">
+        <PropertyRef Name="InvoiceTypeID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="InvoiceType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Invoice__Payment__71D1E811">
+    <End Role="PaymentMethod" Type="Self.PaymentMethod" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentMethod">
+        <PropertyRef Name="PaymentMethodID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="PaymentMethod" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Invoice__StoreID__6EF57B66">
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+    <End Role="Invoice" Type="Self.Invoice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="StoreID" />
+      </Principal>
+      <Dependent Role="Invoice">
+        <PropertyRef Name="StoreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__InvoicePa__Invoi__74AE54BC">
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+    <End Role="InvoicePaymentReceipt" Type="Self.InvoicePaymentReceipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="StoreID" />
+      </Principal>
+      <Dependent Role="InvoicePaymentReceipt">
+        <PropertyRef Name="InvoiceID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__Categ__60A75C0F">
+    <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
+    <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductCategory">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__Order__5FB337D6">
+    <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+    <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Orders">
+        <PropertyRef Name="OrderID" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="OrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__Produ__619B8048">
+    <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__Store__5EBF139D">
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+    <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="StoreID" />
+      </Principal>
+      <Dependent Role="OrderDetails">
+        <PropertyRef Name="StoreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Orders__StoreID__59063A47">
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+    <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="StoreID" />
+      </Principal>
+      <Dependent Role="Orders">
+        <PropertyRef Name="StoreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Store__Package__44FF419A">
+    <End Role="Package" Type="Self.Package" Multiplicity="0..1" />
+    <End Role="Store" Type="Self.Store" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Package">
+        <PropertyRef Name="PackageID" />
+      </Principal>
+      <Dependent Role="Store">
+        <PropertyRef Name="Package" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductCa__Store__4CA06362">
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+    <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="StoreID" />
+      </Principal>
+      <Dependent Role="ProductCategory">
+        <PropertyRef Name="StoreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Products__Catego__5165187F">
+    <End Role="ProductCategory" Type="Self.ProductCategory" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ProductCategory">
+        <PropertyRef Name="CategoryID" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductIm__Produ__5629CD9C">
+    <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="ProductImages" Type="Self.ProductImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Products">
+        <PropertyRef Name="ProductID" />
+      </Principal>
+      <Dependent Role="ProductImages">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ProductIm__Store__5535A963">
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+    <End Role="ProductImages" Type="Self.ProductImage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="StoreID" />
+      </Principal>
+      <Dependent Role="ProductImages">
+        <PropertyRef Name="StoreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Products__StoreI__5070F446">
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+    <End Role="Products" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="StoreID" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="StoreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Users__RoleID__267ABA7A">
+    <End Role="Roles" Type="Self.Role" Multiplicity="0..1" />
+    <End Role="Users" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="RoleID" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__StoreWeb__StoreI__48CFD27E">
+    <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+    <End Role="StoreWeb" Type="Self.StoreWeb" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Store">
+        <PropertyRef Name="StoreID" />
+      </Principal>
+      <Dependent Role="StoreWeb">
+        <PropertyRef Name="StoreID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="db_AnabiaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Cities" EntityType="Self.City" />
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="Invoices" EntityType="Self.Invoice" />
+    <EntitySet Name="InvoicePaymentReceipts" EntityType="Self.InvoicePaymentReceipt" />
+    <EntitySet Name="InvoiceTypes" EntityType="Self.InvoiceType" />
+    <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="Packages" EntityType="Self.Package" />
+    <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethod" />
+    <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
+    <EntitySet Name="ProductImages" EntityType="Self.ProductImage" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="Roles" EntityType="Self.Role" />
+    <EntitySet Name="Stores" EntityType="Self.Store" />
+    <EntitySet Name="StoreWebs" EntityType="Self.StoreWeb" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <AssociationSet Name="FK__Invoice__Invoice__70DDC3D8" Association="Self.FK__Invoice__Invoice__70DDC3D8">
+      <End Role="InvoiceType" EntitySet="InvoiceTypes" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Invoice__Payment__71D1E811" Association="Self.FK__Invoice__Payment__71D1E811">
+      <End Role="PaymentMethod" EntitySet="PaymentMethods" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Invoice__StoreID__6EF57B66" Association="Self.FK__Invoice__StoreID__6EF57B66">
+      <End Role="Store" EntitySet="Stores" />
+      <End Role="Invoice" EntitySet="Invoices" />
+    </AssociationSet>
+    <AssociationSet Name="FK__InvoicePa__Invoi__74AE54BC" Association="Self.FK__InvoicePa__Invoi__74AE54BC">
+      <End Role="Store" EntitySet="Stores" />
+      <End Role="InvoicePaymentReceipt" EntitySet="InvoicePaymentReceipts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__Categ__60A75C0F" Association="Self.FK__OrderDeta__Categ__60A75C0F">
+      <End Role="ProductCategory" EntitySet="ProductCategories" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__Order__5FB337D6" Association="Self.FK__OrderDeta__Order__5FB337D6">
+      <End Role="Orders" EntitySet="Orders" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__Produ__619B8048" Association="Self.FK__OrderDeta__Produ__619B8048">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__Store__5EBF139D" Association="Self.FK__OrderDeta__Store__5EBF139D">
+      <End Role="Store" EntitySet="Stores" />
+      <End Role="OrderDetails" EntitySet="OrderDetails" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Orders__StoreID__59063A47" Association="Self.FK__Orders__StoreID__59063A47">
+      <End Role="Store" EntitySet="Stores" />
+      <End Role="Orders" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Store__Package__44FF419A" Association="Self.FK__Store__Package__44FF419A">
+      <End Role="Package" EntitySet="Packages" />
+      <End Role="Store" EntitySet="Stores" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductCa__Store__4CA06362" Association="Self.FK__ProductCa__Store__4CA06362">
+      <End Role="Store" EntitySet="Stores" />
+      <End Role="ProductCategory" EntitySet="ProductCategories" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Products__Catego__5165187F" Association="Self.FK__Products__Catego__5165187F">
+      <End Role="ProductCategory" EntitySet="ProductCategories" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductIm__Produ__5629CD9C" Association="Self.FK__ProductIm__Produ__5629CD9C">
+      <End Role="Products" EntitySet="Products" />
+      <End Role="ProductImages" EntitySet="ProductImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ProductIm__Store__5535A963" Association="Self.FK__ProductIm__Store__5535A963">
+      <End Role="Store" EntitySet="Stores" />
+      <End Role="ProductImages" EntitySet="ProductImages" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Products__StoreI__5070F446" Association="Self.FK__Products__StoreI__5070F446">
+      <End Role="Store" EntitySet="Stores" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Users__RoleID__267ABA7A" Association="Self.FK__Users__RoleID__267ABA7A">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK__StoreWeb__StoreI__48CFD27E" Association="Self.FK__StoreWeb__StoreI__48CFD27E">
+      <End Role="Store" EntitySet="Stores" />
+      <End Role="StoreWeb" EntitySet="StoreWebs" />
+    </AssociationSet>
+    <EntitySet Name="logoes" EntityType="db_AnabiaModel.logo" />
+  </EntityContainer>
+  <EntityType Name="logo">
+    <Key>
+      <PropertyRef Name="LogoId" />
+    </Key>
+    <Property Name="LogoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Logo1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="StoreID" Type="Int32" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,143 @@
+﻿@model IEnumerable<AnabiaOnline.Models.logo>
+
+@{
+    ViewBag.Title = "LogoIndex";
+    Layout = "~/Views/Shared/dashboard.cshtml";
+}
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">You Have New Brand</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closebtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">Delete successfully</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closebtn1" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Message</h5>
+
+            </div>
+            <div class="modal-body">
+                <p style="text-align: center;">File type must be PNG or JPG</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="closebtn2" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+<script>
+
+    $("#closebtn").click(function (e) {
+        $('#exampleModal').modal('hide');
+
+    });
+    $("#closebtn1").click(function (e) {
+        $('#exampleModal1').modal('hide');
+
+    });
+    $("#closebtn2").click(function (e) {
+        $('#exampleModal2').modal('hide');
+
+    });
+
+</script>
+
+@if (TempData["AddBrand"] != null)
+{
+    <script>
+        $(document).ready(function () {
+            $('#exampleModal').modal('show');
+        });
+
+
+    </script>
+
+}
+@if (TempData["DeleteBrand"] != null)
+{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#exampleModal1').modal('show');
+        });
+    </script>
+}
+@if (TempData["filetype"] != null)
+{
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#exampleModal2').modal('show');
+    });
+</script>
+}
+
+
+
+<h2>Logo List</h2>
+
+<p>
+    @Html.ActionLink("Create New", "LogoAdd", new { @class = "btn btn-primary" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+
+            Logo
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.StoreID.ToString() == Session["StoreID"].ToString())
+        {
+        <tr>
+            <td>
+                <img width="100px" height="100px" src="~/UserAsset/img/ProductImages/@item.Logo1" />
+            </td>
+
+
+            <td>
+
+                @Html.ActionLink("Delete", "LogoDelete", new { id = item.LogoId })
+            </td>
+        </tr>}
+    }
+
+</table>

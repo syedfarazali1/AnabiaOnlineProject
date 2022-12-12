@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0e0e9e28913c45d196d8724b742495e4" Name="Diagram1">
+        <EntityTypeShape EntityType="db_AnabiaModel.City" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_AnabiaModel.Country" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_AnabiaModel.Invoice" Width="1.5" PointX="8.25" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_AnabiaModel.InvoicePaymentReceipt" Width="1.5" PointX="5.25" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_AnabiaModel.InvoiceType" Width="1.5" PointX="6" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_AnabiaModel.OrderDetail" Width="1.5" PointX="7.5" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_AnabiaModel.Order" Width="1.5" PointX="5.25" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_AnabiaModel.Package" Width="1.5" PointX="0.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_AnabiaModel.PaymentMethod" Width="1.5" PointX="6" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_AnabiaModel.ProductCategory" Width="1.5" PointX="5.25" PointY="22.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_AnabiaModel.ProductImage" Width="1.5" PointX="12.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_AnabiaModel.Product" Width="1.5" PointX="10.5" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_AnabiaModel.Role" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_AnabiaModel.Store" Width="1.5" PointX="3" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_AnabiaModel.StoreWeb" Width="1.5" PointX="5.25" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_AnabiaModel.sysdiagram" Width="1.5" PointX="2.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="db_AnabiaModel.User" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="db_AnabiaModel.FK__Invoice__Invoice__70DDC3D8" ManuallyRouted="false" />
+        <AssociationConnector Association="db_AnabiaModel.FK__Invoice__Payment__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="db_AnabiaModel.FK__Invoice__StoreID__6EF57B66" ManuallyRouted="false" />
+        <AssociationConnector Association="db_AnabiaModel.FK__InvoicePa__Invoi__74AE54BC" ManuallyRouted="false" />
+        <AssociationConnector Association="db_AnabiaModel.FK__OrderDeta__Categ__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="db_AnabiaModel.FK__OrderDeta__Order__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="db_AnabiaModel.FK__OrderDeta__Produ__619B8048" ManuallyRouted="false" />
+        <AssociationConnector Association="db_AnabiaModel.FK__OrderDeta__Store__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="db_AnabiaModel.FK__Orders__StoreID__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="db_AnabiaModel.FK__Store__Package__44FF419A" ManuallyRouted="false" />
+        <AssociationConnector Association="db_AnabiaModel.FK__ProductCa__Store__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="db_AnabiaModel.FK__Products__Catego__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="db_AnabiaModel.FK__ProductIm__Produ__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="db_AnabiaModel.FK__ProductIm__Store__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="db_AnabiaModel.FK__Products__StoreI__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="db_AnabiaModel.FK__Users__RoleID__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="db_AnabiaModel.FK__StoreWeb__StoreI__48CFD27E" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="db_AnabiaModel.logo" Width="1.5" PointX="8.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

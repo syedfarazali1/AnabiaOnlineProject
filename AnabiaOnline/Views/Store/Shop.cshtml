@@ -1,0 +1,90 @@
+﻿@model IEnumerable<AnabiaOnline.Models.Store>
+
+@{
+    ViewBag.Title = "Shop";
+    Layout = "~/Views/Shared/UserView.cshtml";
+}
+
+
+
+
+
+
+<!-- Breadcrumb Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+        <div class="col-12">
+            <nav class="breadcrumb bg-light mb-30">
+                <a class="breadcrumb-item text-dark" >Home</a>
+                <a class="breadcrumb-item text-dark" >Shop</a>
+                <span class="breadcrumb-item active">Shop List</span>
+            </nav>
+        </div>
+    </div>
+</div>
+<!-- Breadcrumb End -->
+<!-- Shop Start -->
+<div class="container-fluid">
+    <div class="row px-xl-5">
+
+        @foreach (var item in Model)
+        {
+            foreach (var pd in item.Products)
+            {
+
+
+                if (pd.ProductStatus == 1)
+                {
+
+
+
+                    <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+                        <div class="product-item bg-light mb-4">
+                            <div class="product-img position-relative overflow-hidden" style="height:230px;">
+
+                                <img class="img-fluid w-100" src="~/UserAsset/img/ProductImages/@pd.ProductImage">
+
+
+                                <div class="product-action">
+
+                                    <form action="~/Home" method="post">
+
+                                        <button class="btn btn-outline-dark btn-square" name="id" value="@pd.ProductID"> <i class="fa fa-shopping-cart"></i>   </button>
+                                    </form>
+                                    <a class="btn btn-outline-dark btn-square" href=""><i class="far fa-heart"></i></a>
+                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-sync-alt"></i></a>
+                                    <a class="btn btn-outline-dark btn-square" href=""><i class="fa fa-search"></i></a>
+                                </div>
+                            </div>
+                            <div class="text-center py-4">
+                                <a class="h6 text-decoration-none text-truncate" href=""></a>
+                                <div class="d-flex align-items-center justify-content-center mt-2">
+
+                                    <h5>Rs @pd.Price</h5><h6 class="text-muted ml-2"></h6>
+
+
+                                </div>
+                                <div class="d-flex align-items-center justify-content-center mb-1">
+                                    @if (pd.ProductStockStatus == 1)
+                                    {
+                                        <div style="background-color:blue; border-radius:50px;padding:2px 5px 2px 5px;">
+                                            <small class="text-white fx-5">InStock</small>
+                                        </div>
+
+                                    }
+                                    else
+                                    {
+                                        <div style="background-color:red; border-radius:50px;padding:2px 5px 2px 5px;">
+                                            <small class="text-white fx-5">OutStock</small>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        }
+    </div>
+</div>
+<!-- Shop End -->
